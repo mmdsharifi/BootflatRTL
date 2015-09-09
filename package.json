@@ -23,6 +23,9 @@
   },
   "homepage": "https://github.com/mmdsharifi/gulp-rtlBootstrap-fontawesome",
   "devDependencies": {
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "gulp-bower": "0.0.10",
+    "gulp-notify": "^2.2.0",
+    "gulp-ruby-sass": "^1.4.0"
   }
 }

@@ -60,7 +60,6 @@ gulp.task('browserSync', function() {
 
 gulp.task('watch', ['css', 'browserSync'], function() {
     gulp.watch(config.sassPath + '/**/*.scss', ['css']);
-    gulp.watch(config.htmlPath, ['html'])
     browserSync.watch("./*.html").on("change", browserSync.reload); // browserSync watch task
 });
 

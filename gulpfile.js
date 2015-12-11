@@ -1,9 +1,13 @@
 var gulp = require('gulp'),
-    sass = require('gulp-ruby-sass'),
+    sass = require('gulp-sass'),
     notify = require('gulp-notify'),
     browserSync = require('browser-sync'), // Add browser syns plugin
+    rename = require('gulp-rename'),
+    rtlcss = require('gulp-rtlcss'),
     bower = require('gulp-bower');
-
+    var bootstrapPath ='./bower_components/bootstrap-sass/assets/stylesheets/';
+    var fontawesomePath = './bower_components/font-awesome/scss/';
+    var bootflat = './bower_components/bootflat/bootflat/scss/';
 var config = {
         sassPath: './resources/sass',
         bowerDir: './bower_components'
@@ -28,22 +32,18 @@ gulp.task('icons', function() {
         .pipe(gulp.dest('./public/fonts'));
 });
 
-gulp.task('css', function() {
-    return sass(config.sassPath + '/style.scss', { // Our coustom sass
-            style: 'compressed', // minify css
-            loadPath: [ // load paths to easy use import in resources/sass
-                './resources/sass',
-                config.bowerDir + '/bootstrap-sass/assets/stylesheets', // bootstrap sass files
-                config.bowerDir + '/font-awesome/scss' // awesome icons sass files
-            ]
-        })
-        .on('error', notify.onError(function(error) {
-            return 'Error: ' + error.message;
-        }))
-        .pipe(gulp.dest('./public/css'))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+gulp.task('css', function () {
+        var processors = [
+
+        ];
+        // [].concat( bootstrapPath , fontawesomePath )
+        return gulp.src(config.sassPath + '/style.scss')
+          .pipe(sass({ includePaths : [bootstrapPath , bootflat , fontawesomePath]   }).on('error', sass.logError))
+          //.pipe(postcss(processors))
+          .pipe(gulp.dest('./public/css'))
+          .pipe(rtlcss())
+          .pipe(rename({ suffix: '-rtl' }))
+          .pipe(gulp.dest('./public/css'));
 });
 
 // Add browserSync task

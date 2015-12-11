@@ -20,8 +20,8 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-rtl": "~3.3.4",
     "bootstrap-sass": "bootstrap-sass-official#~3.3.5",
-    "font-awesome": "fontawesome#~4.4.0"
+    "font-awesome": "fontawesome#~4.4.0",
+    "bootflat" : "2.0.4"
   }
 }
